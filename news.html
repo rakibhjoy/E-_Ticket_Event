@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FLIM & FESTIVE | News</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #ff4d4d;
+            --secondary-color: #1a1a1a;
+            --text-color: #ffffff;
+            --accent-color: #ffcc00;
+        }
+        
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: #000;
+            color: var(--text-color);
+            overflow-x: hidden;
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Playfair Display', serif;
+        }
+        
+        .navbar {
+            background-color: rgba(0, 0, 0, 0.9) !important;
+            padding: 15px 0;
+            transition: all 0.3s ease;
+        }
+        
+        .navbar.scrolled {
+            background-color: rgba(0, 0, 0, 0.95) !important;
+            padding: 10px 0;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+        }
+        
+        .navbar-brand, .navbar-nav .nav-link {
+            color: var(--text-color) !important;
+            font-weight: 600;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+        }
+        
+        .navbar-brand {
+            font-size: 1.8rem;
+            font-family: 'Playfair Display', serif;
+        }
+        
+        .nav-link {
+            font-size: 1.1rem;
+            margin: 0 10px;
+            position: relative;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background-color: var(--primary-color);
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        .navbar-toggler {
+            border: none;
+            outline: none;
+        }
+        
+        .navbar-toggler-icon {
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(255, 255, 255, 0.8)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+        }
+        
+        /* Content Sections */
+        .content-section {
+            padding: 100px 0;
+            position: relative;
+        }
+        
+        .section-title {
+            font-size: 3.5rem;
+            margin-bottom: 50px;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            width: 50%;
+            height: 3px;
+            bottom: -10px;
+            left: 0;
+            background-color: var(--primary-color);
+        }
+        
+        /* News Articles */
+        .news-article {
+            margin-bottom: 80px;
+            position: relative;
+        }
+        
+        .news-image {
+            position: relative;
+            overflow: hidden;
+            border-radius: 10px;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5);
+        }
+        
+        .news-image img {
+            width: 100%;
+            height: 500px;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .news-article:hover .news-image img {
+            transform: scale(1.03);
+        }
+        
+        .news-content {
+            background-color: rgba(30, 30, 30, 0.9);
+            padding: 40px;
+            border-radius: 10px;
+            margin-top: -50px;
+            position: relative;
+            z-index: 2;
+            margin-left: 50px;
+            border-left: 5px solid var(--primary-color);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+        
+        .news-date {
+            color: var(--primary-color);
+            font-size: 0.9rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+        }
+        
+        .news-title {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            transition: color 0.3s ease;
+        }
+        
+        .news-article:hover .news-title {
+            color: var(--primary-color);
+        }
+        
+        .news-excerpt {
+            font-size: 1rem;
+            line-height: 1.7;
+            margin-bottom: 20px;
+        }
+        
+        /* Buttons */
+        .btn-custom {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            border-radius: 30px;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+        }
+        
+        .btn-custom:hover {
+            background-color: #ff3333;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(255, 77, 77, 0.3);
+        }
+        
+        /* Footer */
+        .footer {
+            background-color: #111;
+            padding: 80px 0 0;
+        }
+        
+        .footer-logo {
+            font-size: 2rem;
+            font-family: 'Playfair Display', serif;
+            margin-bottom: 20px;
+        }
+        
+        .footer-links h5 {
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .footer-links h5::after {
+            content: '';
+            position: absolute;
+            width: 50px;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background-color: var(--primary-color);
+        }
+        
+        .footer-links ul {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-links a {
+            color: #ccc;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .footer-links a:hover {
+            color: var(--primary-color);
+            padding-left: 5px;
+        }
+        
+        .social-icons a {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            background-color: #333;
+            color: white;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 40px;
+            margin-right: 10px;
+            transition: all 0.3s ease;
+        }
+        
+        .social-icons a:hover {
+            background-color: var(--primary-color);
+            transform: translateY(-5px);
+        }
+        
+        .footer-bottom {
+            background-color: #000;
+            padding: 20px 0;
+            margin-top: 50px;
+            border-top: 1px solid #333;
+        }
+        
+        /* Responsive Adjustments */
+        @media (max-width: 992px) {
+            .section-title {
+                font-size: 2.8rem;
+            }
+            
+            .news-content {
+                margin-left: 30px;
+                padding: 30px;
+            }
+            
+            .news-image img {
+                height: 400px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .section-title {
+                font-size: 2.2rem;
+            }
+            
+            .news-content {
+                margin-left: 15px;
+                margin-right: 15px;
+                padding: 25px;
+            }
+            
+            .news-image img {
+                height: 350px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">FLIM & FESTIVE</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">HOME</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="about.html">ABOUT</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="Event.html">EVENTS</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="news.html">NEWS</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="Tricket.html">TICKETS</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- News Section -->
+    <section class="content-section">
+        <div class="container">
+            <h2 class="section-title text-center">Latest News</h2>
+            
+            <!-- News Article 1 -->
+            <div class="news-article">
+                <div class="row">
+                    <div class="col-lg-8">
+                        <div class="news-image">
+                            <img src="img/p-3.png" alt="All Quiet on the Western Front">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-8 offset-lg-4">
+                        <div class="news-content">
+                            <div class="news-date">May 01, 2025</div>
+                            <h3 class="news-title">'All Quiet on the Western Front'</h3>
+                            <p class="news-excerpt">
+                                Reverberating despair and dread through a theatrical production. <em>All Quiet on the Western Front</em> (1929), a semi-autobiographical novel authored by Erich Maria Remarque, is one of the greatest anti-war works of literature.
+                            </p>
+                            <a href="#" class="btn btn-custom">Read More</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- News Article 2 -->
+            <div class="news-article">
+                <div class="row">
+                    <div class="col-lg-8 offset-lg-4">
+                        <div class="news-image">
+                            <img src="img/p-4.png" alt="Festival Highlights">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-8">
+                        <div class="news-content">
+                            <div class="news-date">April 15, 2025</div>
+                            <h3 class="news-title">2025 Festival Highlights</h3>
+                            <p class="news-excerpt">
+                                Discover the must-see films and events at this year's FLIM & FESTIVE. Our curated selection includes groundbreaking documentaries, avant-garde cinema, and special retrospectives that celebrate the art of filmmaking.
+                            </p>
+                            <a href="#" class="btn btn-custom">Read More</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- News Article 3 -->
+            <div class="news-article">
+                <div class="row">
+                    <div class="col-lg-8">
+                        <div class="news-image">
+                            <img src="img/p-2.png" alt="Filmmaker Workshop">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-8 offset-lg-4">
+                        <div class="news-content">
+                            <div class="news-date">March 28, 2025</div>
+                            <h3 class="news-title">Filmmaker Workshop Series</h3>
+                            <p class="news-excerpt">
+                                Join our exclusive workshops with award-winning directors and cinematographers. Learn about storytelling techniques, visual composition, and the business of independent filmmaking in these intensive sessions.
+                            </p>
+                            <a href="#" class="btn btn-custom">Read More</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter Section -->
+    <section class="content-section bg-dark">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8 text-center">
+                    <h2 class="section-title">Stay Updated</h2>
+                    <p class="lead mb-4">Subscribe to our newsletter for the latest news, film announcements, and festival updates.</p>
+                    <form class="row g-3 justify-content-center">
+                        <div class="col-md-8">
+                            <input type="email" class="form-control form-control-lg" placeholder="Your Email Address">
+                        </div>
+                        <div class="col-md-4">
+                            <button type="submit" class="btn btn-custom w-100">Subscribe</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 mb-4">
+                    <div class="footer-logo">FLIM & FESTIVE</div>
+                    <p>Celebrating the art of cinema and bringing stories to life through our annual film festival.</p>
+                    <div class="social-icons mt-3">
+                        <a href="#"><i class="bi bi-facebook"></i></a>
+                        <a href="#"><i class="bi bi-twitter"></i></a>
+                        <a href="#"><i class="bi bi-instagram"></i></a>
+                        <a href="#"><i class="bi bi-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-6 mb-4">
+                    <div class="footer-links">
+                        <h5>Navigation</h5>
+                        <ul>
+                            <li><a href="index.html">Home</a></li>
+                            <li><a href="about.html">About</a></li>
+                            <li><a href="news.html">News</a></li>
+                            <li><a href="Tricket.html">Tickets</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <div class="footer-links">
+                        <h5>Contact</h5>
+                        <ul>
+                            <li><i class="bi bi-telephone me-2"></i> +8801648391826</li>
+                            <li><i class="bi bi-telephone me-2"></i> +8801866291779</li>
+                            <li><i class="bi bi-envelope me-2"></i> tarua.stage@gmail.com</li>
+                            <li><i class="bi bi-geo-alt me-2"></i> Nobodoy Sangha, 4 Tajmahal Rd, Dhaka 1207</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-3 mb-4">
+                    <div class="footer-links">
+                        <h5>Map</h5>
+                        <div id="map" style="height: 200px; width: 100%; border-radius: 8px;"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom text-center py-3">
+            <div class="container">
+                <p class="mb-0">&copy; 2025 FLIM & FESTIVE. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    
+    <script src="./script.js"></script>
+    <!-- Leaflet JS for Map -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+</body>
+</html>
